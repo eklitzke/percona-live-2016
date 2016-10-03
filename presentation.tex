@@ -204,6 +204,21 @@
   new row tuples will have new ctids.
 \end{frame}
 
+\begin{frame}{An Example}
+  Suppose you have a \texttt{users} table with ten columns, five of which are
+  indexed.
+  \newline
+  \newline
+  If you change the \texttt{email} for a cell you might expect the following
+  updates: one to create a new tuple, and one to update the \texttt{email}
+  index.
+  \newline
+  \newline
+  In fact you'll need: one write to create a new tuple and updates for
+  \textbf{each} index, since the new tuple has a new \texttt{ctid}. All of these
+  physical changes are propagated into the WAL.
+\end{frame}
+
 \begin{frame}{Replication Bandwidth}
   Guess what happened here (February, 2014):
   \newline
